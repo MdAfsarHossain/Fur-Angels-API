@@ -183,3 +183,31 @@ const thumbsUp = (petImage) => {
 
   rightSideContainer.appendChild(div);
 }
+
+
+// Handle Adpot pet
+const adoptPet = (petId) => {
+  const adoptPetId = document.getElementById(`adpot-pet-${petId}`)
+
+  adoptedModal.showModal();
+
+  let count = 3;
+  countDownText.innerText = count;
+  let time = setInterval(() => {
+    count--;
+    if(count>0) {
+      countDownText.innerText = count;
+    }
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(time);
+    adoptedModal.close();
+  }, 3000);
+
+  adoptPetId.disabled = true;
+  adoptPetId.innerText = 'Adopted';
+  
+  adoptPetId.classList.remove('cursor-pointer', 'hover:border-[#0E7A81]');
+  adoptPetId.classList.add('bg-gray-400', 'border-gray-400');
+}
