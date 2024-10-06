@@ -211,3 +211,90 @@ const adoptPet = (petId) => {
   adoptPetId.classList.remove('cursor-pointer', 'hover:border-[#0E7A81]');
   adoptPetId.classList.add('bg-gray-400', 'border-gray-400');
 }
+
+
+// Display All Pets
+const displayAllPets = (pets) => {
+
+  // Spinner
+  hideSpinner();
+
+  // Create HTML elements
+  cardsContainer.textContent = '';
+
+  if(pets.length === 0) {
+    noDataContainer.classList.remove('hidden');
+    noDataContainer.classList.add('flex');
+    return;
+  }
+
+  noDataContainer.classList.add('hidden');
+  
+  handleSortByPrice.addEventListener('click', () => {
+    pets.sort((a, b) => {
+      const priceA = Number(a.price);
+      const priceB = Number(b.price);
+      return priceB - priceA;
+    });
+    displayAllPets(pets);
+  })
+
+  pets.forEach((pet) => {
+      const div = document.createElement('div');
+      div.className = `border-2 p-5 rounded-xl flex flex-col gap-5 pet-card`
+      div.innerHTML = `
+      <div class="h-44">
+              <img
+              class="rounded-lg h-full w-full"
+              src=${pet.image}
+              alt=""
+            />        
+      </div>     
+
+            <div class="">
+              <h1 class="font-bold text-xl text-[#131313]">${pet.pet_name ? pet.pet_name : "Not Available"}</h1>
+              <div class="flex flex-row justify-start items-center gap-2">
+                <i class="fa-solid fa-sliders"></i>
+                <h1 class="text-[#131313B3]">Breed: ${pet.breed ? pet.breed : "Not Available"}</h1>
+              </div>
+              <div class="flex flex-row gap-2 justify-start items-center">
+                <i class="fa-regular fa-calendar"></i>
+
+                <h1 class="text-[#131313B3]">Birth: ${pet.date_of_birth ? pet.date_of_birth.split('-')[0] : "Not Available"}</h1>
+              </div>
+              <div class="flex flex-row justify-start items-center gap-2">
+                <i class="fa-solid fa-mercury"></i>
+                <h1 class="text-[#131313B3]">Gender: ${pet.gender ? pet.gender : "Not Available"}</h1>
+              </div>
+              <div class="flex flex-row justify-start items-center gap-2">
+                <i class="fa-solid fa-dollar-sign"></i>
+                <span class="price">${pet.price ? pet.price+'$' : "Not Available"}</span>
+              </div>
+            </div>
+            <!-- Border -->
+            <div class="border-[1px]"></div>
+            <div class="flex flex-row justify-between">
+              <button
+                onclick="thumbsUp('${pet.image}')"
+                class="border-2 px-4 py-2 rounded-xl cursor-pointer hover:border-[#0E7A81]"
+              >
+                <i class="fa-regular fa-thumbs-up"></i>
+              </button>
+              <button
+                id="adpot-pet-${pet.petId}"
+                onclick="adoptPet(${pet.petId})"
+                class="border-2 px-4 py-2 rounded-xl cursor-pointer hover:border-[#0E7A81] font-bold text-[#0E7A81]"
+              >
+                Adopt
+              </button>
+              <button
+              onclick="loadSinglePets(${pet.petId})"
+                class="border-2 px-4 py-2 rounded-xl cursor-pointer hover:border-[#0E7A81]"
+              >
+                <p class="text-[#0E7A81] font-bold">Details</p>
+              </button>
+            </div>
+      `
+      cardsContainer.appendChild(div);
+  })
+}
