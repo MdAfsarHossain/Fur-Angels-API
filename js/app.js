@@ -121,3 +121,12 @@ const loadPetCategories = async () => {
   const categories = data.categories;
   displayAllCategories(categories);
 }
+
+// Remove all active button class
+const revomeAllActiveButtonsDesign = () => {
+  const buttons = document.getElementsByClassName('category-btn');
+
+  for(let btn of buttons) {
+    btn.classList.remove('rounded-full', 'border-[#0E7A81]', 'bg-[#0E7A811A]');
+  }
+}
