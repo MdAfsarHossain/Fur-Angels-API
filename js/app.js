@@ -17,3 +17,10 @@ const displaySpinner = () => {
   spinner.classList.remove('hidden');
   spinner.classList.add('flex');
 }
+
+// Hide Spinner
+const hideSpinner = () => {
+  petsDisplayContainer.style.display = 'grid';
+   spinner.classList.remove('flex');
+   spinner.classList.add('hidden');
+}
