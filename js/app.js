@@ -106,9 +106,18 @@ const loadSinglePets = async (petId) => {
     </form>
   </div>
   `;
-  
+
   // Append to body
   displayModal.appendChild(div);
   // Display modal
   displayModal.showModal();
+}
+
+
+// Load pet categories
+const loadPetCategories = async () => {
+  const res = await fetch('https://openapi.programming-hero.com/api/peddy/categories')
+  const data = await res.json();
+  const categories = data.categories;
+  displayAllCategories(categories);
 }
