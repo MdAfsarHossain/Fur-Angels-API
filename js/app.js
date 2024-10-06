@@ -298,3 +298,7 @@ const displayAllPets = (pets) => {
       cardsContainer.appendChild(div);
   })
 }
+
+
+loadAllPets();
+loadPetCategories();
