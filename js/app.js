@@ -168,3 +168,18 @@ const displayAllCategories = (categories) => {
     categoriesContainer.appendChild(button);
   })
 }
+
+// Thumbs Up
+const thumbsUp = (petImage) => {
+  const div = document.createElement("div");
+  div.className = `rounded-xl`;
+  div.innerHTML = `
+  <img
+    class="rounded-lg"
+    src=${petImage}
+    alt=""
+  />
+  `;
+
+  rightSideContainer.appendChild(div);
+}
