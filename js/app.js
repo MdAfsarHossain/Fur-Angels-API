@@ -24,3 +24,18 @@ const hideSpinner = () => {
    spinner.classList.remove('flex');
    spinner.classList.add('hidden');
 }
+
+
+// Load all pets
+const loadAllPets = async () => {
+  // Spinner
+  displaySpinner();
+
+  const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets')
+  const data = await res.json();
+  const pets = data.pets;
+
+  setTimeout(() => {
+      displayAllPets(pets);
+  }, 2000)
+}
