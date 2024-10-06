@@ -9,3 +9,11 @@ const petsDisplayContainer = document.getElementById('petsDisplayContainer');
 const handleSortByPrice = document.getElementById('handleSortByPrice');
 const adoptedModal = document.getElementById('adoptedModal');
 const countDownText = document.getElementById('countDownText');
+
+
+// Display Spinner
+const displaySpinner = () => {
+  petsDisplayContainer.style.display = 'none';
+  spinner.classList.remove('hidden');
+  spinner.classList.add('flex');
+}
