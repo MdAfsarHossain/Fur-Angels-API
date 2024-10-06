@@ -151,3 +151,20 @@ const loadSpecificCategories = async (categoryName, categoryId) => {
     displayAllPets(data.data);
 }, 2000)
 }
+
+
+// Display all categories
+const displayAllCategories = (categories) => {
+    
+  categories.forEach(category => {
+    const button = document.createElement('button');
+    button.className = `category-btn flex-1 flex flex-row gap-3 border-2 px-10 py-3 rounded-lg justify-center items-center`;
+    button.onclick = () => loadSpecificCategories(category.category, category.id);
+    button.setAttribute('id', 'activeBtn-'+category.id); 
+    button.innerHTML = `
+    <img class="w-12" src=${category.category_icon} alt="" />
+    <h1 class="font-bold text-2xl">${category.category}</h1>
+    `;
+    categoriesContainer.appendChild(button);
+  })
+}
