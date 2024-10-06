@@ -130,3 +130,24 @@ const revomeAllActiveButtonsDesign = () => {
     btn.classList.remove('rounded-full', 'border-[#0E7A81]', 'bg-[#0E7A811A]');
   }
 }
+
+
+// Load specific categories
+const loadSpecificCategories = async (categoryName, categoryId) => {
+  // Spinner
+  displaySpinner();
+
+  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
+  const data = await res.json();
+
+  // Remove all active button class
+  revomeAllActiveButtonsDesign();
+
+  // Add Active button class
+  const activeBtn = document.getElementById(`activeBtn-${categoryId}`);
+  activeBtn.classList.add('rounded-full', 'border-[#0E7A81]', 'bg-[#0E7A811A]');
+
+  setTimeout(() => {
+    displayAllPets(data.data);
+}, 2000)
+}
