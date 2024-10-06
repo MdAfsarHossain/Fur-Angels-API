@@ -39,3 +39,76 @@ const loadAllPets = async () => {
       displayAllPets(pets);
   }, 2000)
 }
+
+
+// Load single pets
+const loadSinglePets = async (petId) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+  const data = await res.json();
+  const petData = data.petData;
+
+  const div = document.createElement("div");
+  div.className = `modal-box flex flex-col gap-4`;
+  div.innerHTML = `
+  <!-- Image -->
+  <div class="h-60">
+    <img
+      class="w-full h-full rounded-lg"
+      src=${petData.image}
+      alt=""
+    />
+  </div>
+
+  <!-- Info -->
+  <div class="">
+    <h1 class="font-bold text-lg">${petData.pet_name ? petData.pet_name : "Not Available"}</h1>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="flex flex-row justify-start items-center gap-2">
+        <i class="fa-solid fa-sliders"></i>
+        <h1 class="text-[#131313B3]">Breed: ${petData.breed ? petData.breed : "Not Available"}</h1>
+      </div>
+      <div class="flex flex-row gap-2 justify-start items-center">
+        <i class="fa-regular fa-calendar"></i>
+
+        <h1 class="text-[#131313B3]">Birth: ${petData.date_of_birth ? petData.date_of_birth.split('-')[0] : "Not Available"}</h1>
+      </div>
+      <div class="flex flex-row justify-start items-center gap-2">
+        <i class="fa-solid fa-mercury"></i>
+        <h1 class="text-[#131313B3]">Gender: ${petData.gender ? petData.gender : "Not Available"}</h1>
+      </div>
+      <div class="flex flex-row justify-start items-center gap-2">
+        <i class="fa-solid fa-dollar-sign"></i>
+        <h1 class="text-[#131313B3]">Price : ${petData.price ? petData.price+"$" : "Not Available"}</h1>
+      </div>
+      <div class="flex flex-row justify-start items-center gap-2">
+        <i class="fa-solid fa-syringe"></i>
+        <h1 class="text-[#131313B3]">Vaccinated Status: ${petData.vaccinated_status ? petData.vaccinated_status : "Not Available"}</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div class="">
+    <h1 class="font-bold">Details Information</h1>
+    <p>
+    ${petData.pet_details ? petData.pet_details : "Not Available"}
+    </p>
+  </div>
+
+  <div class="w-full">
+    <form method="dialog">
+      <!-- if there is a button in form, it will close the modal -->
+      <button
+        class="btn text-[#0E7A81] bg-[#0E7A811A] w-full hover:bg-[#0E7A8133]"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+  `;
+  
+  // Append to body
+  displayModal.appendChild(div);
+  // Display modal
+  displayModal.showModal();
+}
